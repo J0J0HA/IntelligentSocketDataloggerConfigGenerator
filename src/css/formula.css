@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+html,
+body {
+    padding: 0px;
+    margin: 0px;
+    overflow-x: hidden;
+    font-size: 17.5px;
+}
+
+:root {
+    --aclighter: #d4eafa;
+    --aclightmid: #c4e3f8;
+    --aclight: #a0d5f8;
+    --acnormalselected: rgb(117, 195, 247);
+    --acnormalhover: #2594df;
+    --acnormal: #0076c5;
+    --acdark: #023c63;
+    --dglighter: #d6dbdb;
+    --dglight: #c2cecd;
+    --dgnormal: #557b8a;
+    --dgdark: #2d5261;
+    --clear: #FFFFFF;
+
+    --font: Roboto, monospace;
+}
+
+* {
+    font-family: var(--font);
+    font-size: inherit;
+    color: inherit;
+    background-color: inherit;
+    user-select: none;
+}
+
+input,
+textarea {
+    user-select: text;
+}
+
+.f-button {
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+    padding: 12px;
+    color: var(--acdark);
+    text-decoration: none;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--acnormal);
+    border-radius: 25px;
+    background-color: var(--aclighter);
+    transition: color 0.2s ease-out;
+}
+
+.f-button:hover {
+    transition: color 0.02s;
+    background-color: var(--aclight);
+}
+
+.f-button.f-tag-disabled,
+.f-button.f-tag-disabled:hover {
+    cursor: default;
+    color: var(--dgdark);
+    border-color: var(--dgnormal);
+    background-color: var(--dglight);
+}
+
+.f-prank-midfincur {
+    cursor: url(/src/media/cursor.cur);
+}
+
+.f-content {
+    padding: 10px;
+    padding-top: 0px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 4em;
+}
+
+.f-header.f-part-bar {
+    display: inline-block;
+    z-index: 998;
+    opacity: 1;
+    position: fixed;
+    top: 0px;
+    background-color: var(--acnormal);
+    padding: 10px;
+    box-shadow: 0px 1px 2px 1px var(--acnormal);
+    transition: all .3s ease-in-out;
+}
+
+.f-header.f-part-menu {
+    display: inline;
+    position: relative;
+    top: -1px;
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 30px;
+    color: var(--acdark);
+    cursor: pointer;
+}
+
+.f-floatingmenu {
+    background-color: var(--acnormal);
+    z-index: 999;
+    display: block;
+    position: fixed;
+    bottom: 0px;
+    left: -35vw;
+    width: 33vw;
+    height: 93vh;
+    transition: left .5s;
+    box-shadow: 0px 1px 2px 1px var(--acnormal);
+    padding: 0px;
+    margin: 0px;
+}
+
+.f-floatingmenu>ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+.f-floatingmenu>ul>li {
+    color: var(--acdark);
+    padding: .75em;
+    font-size: 30px;
+    list-style: none;
+    transition: background-color .25s ease-out;
+    border-bottom: 1px solid var(--acdark);
+    cursor: pointer;
+}
+
+.f-floatingmenu>ul>li>a {
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.f-floatingmenu>ul>li:first-child {
+    border-top: 1px solid var(--acdark);
+}
+
+.f-floatingmenu>ul>li:hover {
+    background-color: var(--acnormalhover);
+}
+
+.f-floatingmenu>ul>li.f-tag-selected {
+    background-color: var(--acnormalselected);
+}
+
+.f-floatingmenu.f-tag-shown {
+    left: 0vw;
+}
+
+html:not([data-scroll='0'])>body>.f-header.f-part-bar {
+    opacity: .95;
+    box-shadow: 0px 1px 3px 1px var(--acnormal);
+}
+
+html:not([data-scroll='0'])>body>.f-floatingmenu {
+    opacity: .95;
+    box-shadow: 0px 1px 3px 1px var(--acnormal);
+}
+
+.f-header {
+    display: block;
+    width: 100vw;
+}
+
+.f-header.f-part-title {
+    color: var(--acdark);
+    font-size: 30px;
+    font-weight: bold;
+    display: inline;
+}
+
+.f-option::before {
+    content: "";
+    display: inline-block;
+    padding-left: 3px;
+    border-color: var(--acnormal);
+    border-style: solid;
+    border-width: 2px;
+    background-color: var(--clear);
+    width: 13px;
+    height: 15px;
+    position: relative;
+    top: 3px;
+    margin-right: 7.5px;
+    border-width: 2px;
+    transition: all 0.2s;
+}
+
+.f-option.f-tag-disabled::before {
+    border-color: var(--dgnormal);
+    background-color: var(--dglight);
+}
+
+.f-option.f-style-multi.f-tag-required::before,
+.f-option.f-style-radio.f-tag-optional::before {
+    border-style: dashed;
+}
+
+.f-option.f-tag-selected::before {
+    color: var(--acnormal);
+    background: radial-gradient(circle, var(--acnormal) 40%, var(--aclight) 40%);
+    content: "";
+}
+
+.f-option.f-tag-selected.f-tag-disabled::before {
+    background: radial-gradient(circle, var(--dgnormal) 40%, var(--dglight) 40%);
+    content: "";
+}
+
+.f-option.f-style-multi.f-tag-oneway.f-tag-selected::before {
+    background: radial-gradient(circle, var(--acnormal) 40%, var(--dglight) 40%);
+    border-color: var(--dgnormal);
+}
+
+.f-option.f-style-multi.f-tag-oneway.f-tag-selected.f-tag-disabled::before {
+    background: radial-gradient(circle, var(--dgnormal) 40%, var(--dglight) 40%);
+    border-color: var(--dgnormal);
+}
+
+.f-option.f-style-radio::before {
+    border-radius: 100%;
+}
+
+.f-option.f-style-multi::before {
+    border-radius: 10%;
+}
+
+.f-option {
+    margin: 5px;
+    cursor: pointer;
+}
+
+.f-option:hover::before {
+    background-color: var(--aclighter);
+}
+
+.f-option.f-tag-selected:hover::before {
+    color: var(--acnormal);
+    background: radial-gradient(circle, var(--acnormal) 40%, var(--aclighter) 40%);
+    content: "";
+}
+
+/*
+
+.f-option.f-tag-selected.f-tag-disabled:hover::before {
+    background: radial-gradient(circle, var(--dgnormal) 40%, var(--dglighter) 40%);
+    content: "";
+}
+
+.f-option.f-style-multi.f-tag-oneway.f-tag-selected.f-tag-disabled:hover::before {
+    background: radial-gradient(circle, var(--acnormal) 40%, var(--dglighter) 40%);
+    border-color: var(--dgnormal);
+}
+.f-option.f-style-multi.f-tag-oneway.f-tag-selected.f-tag-disabled:hover::before {
+    background: radial-gradient(circle, var(--dgnormal) 40%, var(--dglighter) 40%);
+    border-color: var(--dgnormal);
+}*/
+
+.f-table {
+    margin-top: 10px;
+    background-color: var(--aclighter);
+    border-collapse: collapse;
+    border-style: hidden;
+    border-radius: 7.5px;
+    overflow: hidden
+}
+
+.f-part-tr:nth-child(even) {
+    background-color: var(--aclightmid);
+}
+
+.f-part-td,
+.f-part-tr,
+.f-part-th {
+    background-color: inherit;
+    padding: 10px;
+}
+
+.f-part-th {
+    background-color: var(--aclight);
+}
+
+.f-input {
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--acnormal);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+.f-input[type="password"] {
+    color: var(--acdark);
+}
+
+.f-input:hover {
+    background-color: var(--aclighter);
+}
+
+.f-collapse>.f-part-trigger::before {
+    content: "\2B9F";
+}
+
+.f-collapse.f-tag-collapsed>.f-part-trigger::before {
+    content: "\2B9E";
+}
+
+.f-collapse>.f-part-trigger {
+    display: block;
+    cursor: pointer;
+}
+
+.f-collapse>.f-part-content {
+    text-indent: 15px;
+}
+
+.f-collapse.f-tag-collapsed>.f-part-content {
+    display: none;
+}
+
+.f-extra-fill {
+    width: max-content;
+    width: calc(100% - 20px);
+}
+
+.f-extra-flip {
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+}
+
+.f-multi-list > li {
+    color: red;
+}
+
+code {
+    font-family: monospace;
+}

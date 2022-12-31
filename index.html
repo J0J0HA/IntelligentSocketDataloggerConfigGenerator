@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/src/css/formula.css">
+    <script src="/src/js/FileSaver.js"></script>
+    <script src="/src/js/jquery.js"></script>
+    <script src="/src/js/formula.js"></script>
+    <script src="/src/js/index.js"></script>
+    <title>ISDL Config Editor</title>
+</head>
+
+<body>
+    <div class="f-header f-part-bar">
+        <div class="f-header f-part-menu">&#x2630;</div>
+        <div class="f-header f-part-title">ISDL Config Editor</div>
+    </div>
+    <div class="f-floatingmenu">
+        <ul>
+            <li select>Editor</li> <!-- USE FREF -->
+        </ul>
+    </div>
+    <div class="f-content">
+        <br>
+        <p>
+            This is a config editor for <a link-github-repo>Technik-Tueftler/IntelligentSocketDatalogger</a>.<br>
+            Load a file to edit or start with an empty file using the editing options.<br>
+            Press "Save and Download" to save your current inputs to a isdl_config.json in your downloads folder.<br>
+            All files are process locally in your browser, this website is fully client-side.
+        </p>
+        <br>
+        <div collapse>
+            <h1 trigger>Files</h1>
+            <table content>
+                <thead>
+                    <th>Name</th>
+                    <th>Value</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>config.json</code></td>
+                        <td>
+                            <input id="config-file" type="file">
+                        </td>
+                        <td>
+                            <button name="load-config">Upload</button>
+                            <button name="save-config">Download</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>devices.json</code></td>
+                        <td>
+                            <input id="devices-file" type="file">
+                        </td>
+                        <td>
+                            <button name="load-devices">Upload</button>
+                            <button name="save-devices">Download</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+        </div>
+
+        <div collapse collapsed>
+            <h1 trigger>General Settings (<code>config.json</code>)</h1>
+            <table content>
+                <thead>
+                    <th>Setting</th>
+                    <th>Value</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Log Level</td>
+                        <td>
+                            <input id="log_level" type="text" value="info" onchange="generate()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cost Calc at Daytime</td>
+                        <td>
+                            <input id="cost_calc_request_time" type="text" value="00:00" onchange="generate()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Price per kwh in €, $, £, ...</td>
+                        <td>
+                            <input id="price_kwh" type="number" min="0" step="0.1" value="0.3" onchange="generate()">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+        </div>
+
+        <div collapse collapsed>
+            <h1 trigger>Devices (<code>devices.json</code>)</h1>
+            <div content>
+                <div id="edit-box" hide><table extra-fill>
+                    <thead>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>IP-Adress</th>
+                        <th>Update Interval</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input id="edit-name" type="text">
+                            </td>
+                            <td>
+                                <span id="edit-type">none</span>
+                                <button name="edit-type-edit" extra-flip>✎</button>
+                            </td>
+                            <td>
+                                <input id="edit-ip" type="text">
+                            </td>
+                            <td>
+                                <input id="edit-update_time" type="text">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button name="edit-cancel">Cancel</button>
+                <button name="edit-save">Save</button>
+            </div>
+                <table extra-fill>
+                    <thead>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>IP-Adress</th>
+                        <th>Update Interval</th>
+                        <th>Actions</th>
+                    </thead>
+                    <tbody id="devviebod">
+                        <tr>
+                            <td>
+                                No Devices listed.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button name="add-device">Add device</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
