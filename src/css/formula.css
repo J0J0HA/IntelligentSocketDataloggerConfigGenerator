@@ -106,10 +106,11 @@ textarea {
     z-index: 999;
     display: block;
     position: fixed;
-    bottom: 0px;
+    top: 60px;
     left: -35vw;
     width: 33vw;
-    height: 93vh;
+    height: 100vh; /* REMOVE IN FUTURE */
+    height: 100dvh;
     transition: left .5s;
     box-shadow: 0px 1px 2px 1px var(--acnormal);
     padding: 0px;
