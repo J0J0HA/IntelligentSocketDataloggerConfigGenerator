@@ -2,8 +2,8 @@ const formula = {
     button_actions: {},
     radio_actions: {},
     autoassign: () => {
-        $("multiselect").addClass("f-option f-style-multi")
-        $("radioselect").addClass("f-option f-style-radio")
+        $("*[option-multi]").prop('option-multi', false).addClass("f-option f-style-multi")
+        $("*[option-radio]").prop('option-radio', false).addClass("f-option f-style-radio")
         $("*[hide]").prop('hide', false).css("display", "none");
         $("*[disable]").prop('disable', false).addClass("f-tag-disabled");
         $("*[optional]").prop("optional", false).addClass("f-tag-optional");
@@ -12,6 +12,9 @@ const formula = {
         $("*[select]").prop("select", false).addClass("f-tag-selected");
         $("*[extra-fill]").prop("extra-fill", false).addClass("f-extra-fill");
         $("*[extra-flip]").prop("extra-flip", false).addClass("f-extra-flip");
+        $("*[extra-short]").prop("extra-short", false).addClass("f-extra-short");
+        $("*[extra-center]").prop("extra-center", false).addClass("f-extra-center");
+        $("*[extra-right]").prop("extra-right", false).addClass("f-extra-right");
         $("*[collapse]").prop("collapse", false).addClass("f-collapse");
         $("*[collapsed]").prop("collapsed", false).addClass("f-tag-collapsed");
         $("*[trigger]").prop("trigger", false).addClass("f-part-trigger");
@@ -25,16 +28,18 @@ const formula = {
         $("[link-github-repo]").each((index, element) => {
             const $element = $(element);
             $element.attr("href", "https://github.com/" + $element.text());
+            $element.prepend('<i class="fa-brands fa-github"></i> ')
         });
         formula.reindex_static();
     },
-    reindex_static: () =>{
+    reindex_static: () => {
         $("button").addClass("f-button")
         $("input[type='submit']").addClass("f-button")
         $("input[type='button']").addClass("f-button")
         $("input[type='text']").addClass("f-input")
         $("input[type='number']").addClass("f-input")
         $("input[type='password']").addClass("f-input")
+        $("select").addClass("f-input").css("width", "fit-content")
         $("table").addClass("f-table")
         $("th").addClass("f-part-th")
         $("td").addClass("f-part-td")
@@ -90,10 +95,27 @@ const formula = {
     },
     getOptionValue: (nm) => {
         elm = $(".f-option[name='" + nm + "']");
-        if (elm.hasClass("multi")) {
+        if (elm.hasClass("f-style-multi")) {
             return elm.hasClass("f-tag-selected");
         } else {
             return $(".f-option.f-tag-selected[name='" + nm + "']").attr("value") || null;
+        }
+    },
+    setOptionValue: (nm, to) => {
+        elm = $(".f-option[name='" + nm + "']");
+        if (elm.hasClass("f-style-multi")) {
+            if (elm.hasClass("f-tag-selected") != to)
+                elm.toggleClass("f-tag-selected")
+        } else {
+            alert("Not allowed!");
+        }
+    },
+    toggleOptionValue: (nm, to) => {
+        elm = $(".f-option[name='" + nm + "']");
+        if (elm.hasClass("f-style-multi")) {
+            elm.toggleClass("f-tag-selected")
+        } else {
+            alert("Not allowed!");
         }
     },
     disable: (jq) => {

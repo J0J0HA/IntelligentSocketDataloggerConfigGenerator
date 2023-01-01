@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&family=Roboto:wght@100&display=swap');
 
 html,
 body {
@@ -271,6 +272,14 @@ html:not([data-scroll='0'])>body>.f-floatingmenu {
     overflow: hidden
 }
 
+.f-table.f-extra-center > tbody > .f-part-tr > .f-part-td,
+.f-table.f-extra-center > .f-part-tr > .f-part-td {
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+}
+
 .f-part-tr:nth-child(even) {
     background-color: var(--aclightmid);
 }
@@ -295,6 +304,7 @@ html:not([data-scroll='0'])>body>.f-floatingmenu {
     margin: 5px;
     margin-top: 10px;
     transition: background-color 0.2s;
+    width: 150px;
 }
 
 .f-input[type="password"] {
@@ -306,11 +316,13 @@ html:not([data-scroll='0'])>body>.f-floatingmenu {
 }
 
 .f-collapse>.f-part-trigger::before {
-    content: "\2B9F";
+    content: "\23F7";
+    font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', sans-serif;
 }
 
 .f-collapse.f-tag-collapsed>.f-part-trigger::before {
-    content: "\2B9E";
+    content: "\23F5";
+    font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', sans-serif;
 }
 
 .f-collapse>.f-part-trigger {
@@ -331,6 +343,10 @@ html:not([data-scroll='0'])>body>.f-floatingmenu {
     width: calc(100% - 20px);
 }
 
+.f-extra-right {
+    float: right;
+}
+
 .f-extra-flip {
     -moz-transform: scale(-1, 1);
     -webkit-transform: scale(-1, 1);
@@ -339,10 +355,30 @@ html:not([data-scroll='0'])>body>.f-floatingmenu {
     transform: scale(-1, 1);
 }
 
+.f-extra-short {
+    width: 40px;
+}
+
 .f-multi-list > li {
     color: red;
 }
 
-code {
+code, pre {
     font-family: monospace;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2 {
+    font-size: 25px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+h4, h5, h6 {
+    font-size: 15px;
 }

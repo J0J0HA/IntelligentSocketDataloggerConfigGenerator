@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <script src="https://kit.fontawesome.com/858c9623af.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/src/css/formula.css">
     <script src="/src/js/FileSaver.js"></script>
     <script src="/src/js/jquery.js"></script>
@@ -12,97 +13,94 @@
 
 <body>
     <div class="f-header f-part-bar">
-        <div class="f-header f-part-menu">&#x2630;</div>
+        <div class="f-header f-part-menu"><i class="fa-solid fa-bars"></i></div>
         <div class="f-header f-part-title">ISDL Config Editor</div>
     </div>
     <div class="f-floatingmenu">
         <ul>
-            <li select>Editor</li> <!-- USE FREF -->
+            <li select><i class="fa-solid fa-house"></i> Editor</li>
+            <li fref="https://github.com/J0J0HA/IntelligentSocketDataloggerConfigGenerator"><i class="fa-brands fa-github"></i> Show this on GitHub</li>
+            <li fref="https://github.com/Technik-Tueftler/IntelligentSocketDatalogger"><i class="fa-brands fa-github"></i> Show ISDL on GitHub</li>
+            <li fref="https://github.com/Technik-Tueftler/IntelligentSocketDatalogger/blob/main/README.md#configuration-files"><i class="fa-brands fa-github"></i> Reference</li>
         </ul>
     </div>
     <div class="f-content">
         <br>
         <p>
             This is a config editor for <a link-github-repo>Technik-Tueftler/IntelligentSocketDatalogger</a>.<br>
-            Load a file to edit or start with an empty file using the editing options.<br>
-            Press "Save and Download" to save your current inputs to a isdl_config.json in your downloads folder.<br>
-            All files are process locally in your browser, this website is fully client-side.
+            Load a file with <i class="fa-solid fa-file-import"></i><br>
+            Press <i class="fa-solid fa-download"></i> to save your current inputs to your downloads folder.<br>
+            All files are process locally in your browser, this website is fully client-side.<br><br>
         </p>
-        <br>
-        <div collapse>
-            <h1 trigger>Files</h1>
-            <table content>
-                <thead>
-                    <th>Name</th>
-                    <th>Value</th>
-                    <th>Actions</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code>config.json</code></td>
-                        <td>
-                            <input id="config-file" type="file">
-                        </td>
-                        <td>
-                            <button name="load-config">Upload</button>
-                            <button name="save-config">Download</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>devices.json</code></td>
-                        <td>
-                            <input id="devices-file" type="file">
-                        </td>
-                        <td>
-                            <button name="load-devices">Upload</button>
-                            <button name="save-devices">Download</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-        </div>
+        <h3>Files</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <td><code>config.json</code></td>
+                    <td>
+                        <input id="config-file" type="file">
+                    </td>
+                    <td>
+                        <button name="load-config"><i class="fa-solid fa-file-import"></i></button>
+                        <button name="save-config"><i class="fa-solid fa-download"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>devices.json</code></td>
+                    <td>
+                        <input id="devices-file" type="file">
+                    </td>
+                    <td>
+                        <button name="load-devices"><i class="fa-solid fa-file-import"></i></button>
+                        <button name="save-devices"><i class="fa-solid fa-download"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-        <div collapse collapsed>
-            <h1 trigger>General Settings (<code>config.json</code>)</h1>
-            <table content>
-                <thead>
-                    <th>Setting</th>
-                    <th>Value</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Log Level</td>
-                        <td>
-                            <input id="log_level" type="text" value="info" onchange="generate()">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Cost Calc at Daytime</td>
-                        <td>
-                            <input id="cost_calc_request_time" type="text" value="00:00" onchange="generate()">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Price per kwh in €, $, £, ...</td>
-                        <td>
-                            <input id="price_kwh" type="number" min="0" step="0.1" value="0.3" onchange="generate()">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-        </div>
+        <h3>General Settings (<code>config.json</code>)</h3>
+        <table>
+            <thead>
+                <th>Setting</th>
+                <th>Value</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Log all worse than</td>
+                    <td>
+                        <select id="log_level" onchange="generate()">
+                            <option value="error">Errors</option>
+                            <option value="warning">Warnings</option>
+                            <option value="info" selected>Informations</option>
+                            <option value="debug">Debug-Messages</option>
+                          </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cost Calc at Daytime</td>
+                    <td>
+                        <input id="cost_calc_request_time" type="text" value="00:00" onchange="generate()">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Price per kwh in €, $, £, ...</td>
+                    <td>
+                        <input id="price_kwh" type="number" min="0" step="0.1" value="0.3" onchange="generate()">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-        <div collapse collapsed>
-            <h1 trigger>Devices (<code>devices.json</code>)</h1>
-            <div content>
-                <div id="edit-box" hide><table extra-fill>
+        <div>
+            <h3>Devices (<code>devices.json</code>)</h3>
+            <div id="edit-box" hide>
+                <table extra-fill>
                     <thead>
                         <th>Name</th>
                         <th>Type</th>
                         <th>IP-Adress</th>
                         <th>Update Interval</th>
+                        <th>Cost Calculation at <span id="filltime"></span></th>
                     </thead>
                     <tbody>
                         <tr>
@@ -111,38 +109,46 @@
                             </td>
                             <td>
                                 <span id="edit-type">none</span>
-                                <button name="edit-type-edit" extra-flip>✎</button>
+                                <button name="edit-type-edit"><i class="fa-solid fa-pen"></i></button>
                             </td>
                             <td>
                                 <input id="edit-ip" type="text">
                             </td>
                             <td>
-                                <input id="edit-update_time" type="text">
+                                <input id="edit-update_time" type="number" min="1" step="1" extra-short>sec
                             </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button name="edit-cancel">Cancel</button>
-                <button name="edit-save">Save</button>
-            </div>
-                <table extra-fill>
-                    <thead>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>IP-Adress</th>
-                        <th>Update Interval</th>
-                        <th>Actions</th>
-                    </thead>
-                    <tbody id="devviebod">
-                        <tr>
                             <td>
-                                No Devices listed.
+                                <span name="edit-cost_calc_day" option-multi></span>every day<br>
+                                <span name="edit-cost_calc_month" option-multi></span>every <input id="dayofmonth"
+                                    type="number" min="1" max="31" step="1" extra-short>. day of month<br>
+                                <span name="edit-cost_calc_year" option-multi></span>every <input id="dayofyear"
+                                    type="number" min="1" max="31" step="1" extra-short>.<input id="monthofyear"
+                                    type="number" min="1" max="12" step="1" extra-short>. of year<br>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <button name="add-device">Add device</button>
+                <button name="edit-cancel"><i class="fa-solid fa-xmark"></i></button>
+                <button name="edit-save"><i class="fa-solid fa-floppy-disk"></i></button>
             </div>
+            <table extra-fill extra-center>
+                <thead>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>IP-Adress</th>
+                    <th>Update Interval</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody id="devviebod">
+                    <tr>
+                        <td>
+                            No Devices listed.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button name="add-device"><i class="fa-solid fa-plus"></i></button>
+            <br>
         </div>
     </div>
 </body>
