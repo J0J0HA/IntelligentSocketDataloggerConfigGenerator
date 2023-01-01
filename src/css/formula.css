@@ -307,6 +307,15 @@ html:not([data-scroll='0'])>body>.f-floatingmenu {
     width: 150px;
 }
 
+.f-input.f-tag-wrong {
+    border-color: red;
+    background-color: rgba(255, 0, 0, 0.37);
+}
+
+.f-input.f-tag-wrong:hover {
+    background-color: rgba(255, 56, 56, 0.37);
+}
+
 .f-input[type="password"] {
     color: var(--acdark);
 }

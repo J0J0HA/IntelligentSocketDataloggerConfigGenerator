@@ -104,8 +104,8 @@ const formula = {
     setOptionValue: (nm, to) => {
         elm = $(".f-option[name='" + nm + "']");
         if (elm.hasClass("f-style-multi")) {
-            if (elm.hasClass("f-tag-selected") != to)
-                elm.toggleClass("f-tag-selected")
+            if (to) elm.addClass("f-tag-selected")
+            else elm.removeClass("f-tag-selected")
         } else {
             alert("Not allowed!");
         }

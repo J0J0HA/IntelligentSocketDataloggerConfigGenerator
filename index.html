@@ -68,6 +68,7 @@
                 <tr>
                     <td>Log all worse than</td>
                     <td>
+                        <span id="selected_icon"><i class="fa-solid fa-circle-info"></i></span>
                         <select id="log_level" onchange="generate()">
                             <option value="error">Errors</option>
                             <option value="warning">Warnings</option>
@@ -79,12 +80,14 @@
                 <tr>
                     <td>Cost Calc at Daytime</td>
                     <td>
+                        <i class="fa-solid fa-clock"></i>
                         <input id="cost_calc_request_time" type="text" value="00:00" onchange="generate()">
                     </td>
                 </tr>
                 <tr>
                     <td>Price per kwh in €, $, £, ...</td>
                     <td>
+                        <i class="fa-solid fa-coins"></i>
                         <input id="price_kwh" type="number" min="0" step="0.1" value="0.3" onchange="generate()">
                     </td>
                 </tr>
@@ -100,7 +103,7 @@
                         <th>Type</th>
                         <th>IP-Adress</th>
                         <th>Update Interval</th>
-                        <th>Cost Calculation at <span id="filltime"></span></th>
+                        <th>Cost Calculation at <span name="filltime"></span></th>
                     </thead>
                     <tbody>
                         <tr>
@@ -137,6 +140,7 @@
                     <th>Type</th>
                     <th>IP-Adress</th>
                     <th>Update Interval</th>
+                    <th>Cost Calc at <span name="filltime"></span><br>Daily<br>Monthly<br>Yearly</th>
                     <th>Actions</th>
                 </thead>
                 <tbody id="devviebod">

@@ -4,6 +4,12 @@ const devices = {
     "shelly:3em": "Shelly 3EM"
 };
 
+const loglevelicon = {
+    "debug": '<i class="fa-solid fa-bug"></i>',
+    "info": '<i class="fa-solid fa-circle-info"></i>',
+    "warning": '<i class="fa-solid fa-triangle-exclamation"></i>',
+    "error": '<i class="fa-solid fa-square-xmark"></i>'
+}
 
 if (!String.prototype.padStart) {
     String.prototype.padStart = function (paddingValue) {
@@ -122,10 +128,27 @@ $(() => {
 
     setInterval(() => {
         // Transfer Time
-        $("#filltime").text($("#cost_calc_request_time").val())
+        $("[name=filltime]").text($("#cost_calc_request_time").val())
+        $("#selected_icon").html(loglevelicon[$("#log_level").val()])
 
         // Check values to be valid here!
-    }, 1000)
+        if (!$("#cost_calc_request_time").val().match(/^\d\d\:\d\d$/g)) $("#cost_calc_request_time").addClass("f-tag-wrong")
+        else $("#cost_calc_request_time").removeClass("f-tag-wrong")
+        if (!$("#price_kwh").val().match(/^[\d\.]+$/g) || (parseFloat($("#price_kwh").val()) <= 0)) $("#price_kwh").addClass("f-tag-wrong")
+        else $("#price_kwh").removeClass("f-tag-wrong")
+        if (!$("#edit-name").val().match(/^.+$/g) || (($("#edit-name").val() != edit_name_no_alert) && ($("#edit-name").val() in current.devices))) $("#edit-name").addClass("f-tag-wrong")
+        else $("#edit-name").removeClass("f-tag-wrong")
+        if (!$("#edit-ip").val().match(/^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/g)) $("#edit-ip").addClass("f-tag-wrong")
+        else $("#edit-ip").removeClass("f-tag-wrong")
+        if (!$("#edit-update_time").val().match(/^\d+$/g) || (parseInt($("#edit-update_time").val()) <= 0)) $("#edit-update_time").addClass("f-tag-wrong")
+        else $("#edit-update_time").removeClass("f-tag-wrong")
+        if (!$("#dayofmonth").val().match(/^\d+$/g) || (parseInt($("#dayofmonth").val()) <= 0) || (parseInt($("#dayofmonth").val()) > 31)) $("#dayofmonth").addClass("f-tag-wrong")
+        else $("#dayofmonth").removeClass("f-tag-wrong")
+        if (!$("#dayofyear").val().match(/^\d+$/g) || (parseInt($("#dayofyear").val()) <= 0) || (parseInt($("#dayofyear").val()) > 31)) $("#dayofyear").addClass("f-tag-wrong")
+        else $("#dayofyear").removeClass("f-tag-wrong")
+        if (!$("#monthofyear").val().match(/^\d+$/g) || (parseInt($("#monthofyear").val()) <= 0) || (parseInt($("#monthofyear").val()) > 12)) $("#monthofyear").addClass("f-tag-wrong")
+        else $("#monthofyear").removeClass("f-tag-wrong")
+    }, 250)
 
     list_devices();
 });
@@ -139,6 +162,7 @@ function list_devices() {
         html += '<td><i class="fa-solid fa-bullseye"></i> ' + (devices[dval["type"]] || dval["type"] || "undefined") + "</td>";
         html += '<td><i class="fa-solid fa-display"></i> ' + dval["ip"] + "</td>";
         html += '<td><i class="fa-regular fa-clock"></i> ' + dval["update_time"] + "sec</td>";
+        html += '<td>' + (dval["cost_calc_day"] ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-xmark"></i>') + '<br>' + (dval["cost_calc_month"] ? ('<i class="fa-solid fa-calendar-days"></i> ' + dval["cost_calc_month"] + ".") : '<i class="fa-solid fa-xmark"></i>') + '<br>' + (dval["cost_calc_year"] ? ('<i class="fa-solid fa-calendar-days"></i> ' + dval["cost_calc_year"] + ".") : '<i class="fa-solid fa-xmark"></i>') + '</td>';
         html += '<td><button onclick="edit_device(\'' + dname + '\')"><i class="fa-solid fa-gear"></i></button><button onclick="delete_device(\'' + dname + '\')"><i class="fa-solid fa-trash-can"></i></button></td>';
         html += "</tr>";
     }
