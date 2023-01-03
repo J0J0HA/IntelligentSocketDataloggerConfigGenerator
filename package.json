@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/J0J0HA/IntelligentSocketDataloggerConfigGenerator#readme",
   "dependencies": {
-    "@jojojux/formulajs": "^1.1.0"
+    "@jojojux/formulajs": "^1.1.1"
   }
 }
