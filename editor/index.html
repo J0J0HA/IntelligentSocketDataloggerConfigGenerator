@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://kit.fontawesome.com/858c9623af.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/node_modules/@jojojux/formulajs/css/formula.css">
+    <script src="/src/js/FileSaver.js"></script>
+    <script src="/node_modules/@jojojux/formulajs/js/jquery.js"></script>
+    <script src="/node_modules/@jojojux/formulajs/js/formula.js"></script>
+    <script src="/src/js/editor.js"></script>
+    <title>ISDL Config Editor</title>
+</head>
+
+<body>
+    <p hide style="position:absolute;position:sticky;position:fixed;top:0px;left:0px;width:100vw;height:100vh;margin:0px;padding:10px;z-index:999;background:white;color:black;"><br><br>If you see this Screen, the JS has not yet been executed.<br>If you have a slow ethernet connection, please wait some time for the code to load,<br>otherwise proparbly JS is disabled.<br><br><br>This Website requires JavaScript to be enabled, which seems not to be the case.<br>Try a newer version of this browser, another browser or look in your browser settings for "JavaScript" and enable it.<br><br><br>This error can also show up if the JS-Code contained mistakes/issues. If no other solution works for you, please add a bug report at: <a href="https://github.com/J0J0HA/IntelligentSocketDataloggerConfigGenerator/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D">https://github.com/J0J0HA/IntelligentSocketDataloggerConfigGenerator/issues/new/choose</a></p>
+    <div class="f-header f-part-bar">
+        <div class="f-header f-part-menu"><i class="fa-solid fa-bars"></i></div>
+        <div class="f-header f-part-title">ISDL Config Editor</div>
+    </div>
+    <div class="f-floatingmenu">
+        <ul>
+            <li fref="/"><i class="fa-solid fa-house"></i> Home</li>
+            <li select><i class="fa-solid fa-gears"></i> Config Editor</li>
+            <li fref="/plugins"><i class="fa-solid fa-terminal"></i> Plugins Editor</li>
+            <li fref="https://github.com/J0J0HA/IntelligentSocketDataloggerConfigGenerator"><i class="fa-brands fa-github"></i> Show this on GitHub</li>
+            <li fref="https://github.com/Technik-Tueftler/IntelligentSocketDatalogger"><i class="fa-brands fa-github"></i> Show ISDL on GitHub</li>
+            <li fref="https://github.com/Technik-Tueftler/IntelligentSocketDatalogger/blob/main/README.md#configuration-files"><i class="fa-brands fa-github"></i> Reference</li>
+        </ul>
+    </div>
+    <div class="f-content">
+        <br>
+        <p>
+            This is a config editor for <a link-github-repo>Technik-Tueftler/IntelligentSocketDatalogger</a>.<br>
+            Load a file with <i class="fa-solid fa-file-import"></i><br>
+            Press <i class="fa-solid fa-download"></i> to save your current inputs to your downloads folder.<br>
+            All files are process locally in your browser, this website is fully client-side.<br><br>
+        </p>
+        <h3>Files</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <td><code>config.json</code></td>
+                    <td>
+                        <input id="config-file" type="file">
+                    </td>
+                    <td>
+                        <button name="load-config"><i class="fa-solid fa-file-import"></i></button>
+                        <button name="save-config"><i class="fa-solid fa-download"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>devices.json</code></td>
+                    <td>
+                        <input id="devices-file" type="file">
+                    </td>
+                    <td>
+                        <button name="load-devices"><i class="fa-solid fa-file-import"></i></button>
+                        <button name="save-devices"><i class="fa-solid fa-download"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>General Settings (<code>config.json</code>)</h3>
+        <table>
+            <thead>
+                <th>Setting</th>
+                <th>Value</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Log all worse than</td>
+                    <td>
+                        <span id="selected_icon"><i class="fa-solid fa-circle-info"></i></span>
+                        <select id="log_level" onchange="generate()">
+                            <option value="error">Errors</option>
+                            <option value="warning">Warnings</option>
+                            <option value="info" selected>Informations</option>
+                            <option value="debug">Debug-Messages</option>
+                          </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cost Calc at Daytime</td>
+                    <td>
+                        <i class="fa-solid fa-clock"></i>
+                        <input id="cost_calc_request_time" type="text" value="00:00" onchange="generate()">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Price per kwh in €, $, £, ...</td>
+                    <td>
+                        <i class="fa-solid fa-coins"></i>
+                        <input id="price_kwh" type="number" min="0" step="0.1" value="0.3" onchange="generate()">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div>
+            <h3>Devices (<code>devices.json</code>)</h3>
+            <div id="edit-box" hide>
+                <table extra-fill>
+                    <thead>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>IP-Adress</th>
+                        <th>Update Interval</th>
+                        <th>Cost Calculation at <span name="filltime"></span></th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input id="edit-name" type="text">
+                            </td>
+                            <td>
+                                <span id="edit-type">none</span>
+                                <button name="edit-type-edit"><i class="fa-solid fa-pen"></i></button>
+                            </td>
+                            <td>
+                                <input id="edit-ip" type="text">
+                            </td>
+                            <td>
+                                <input id="edit-update_time" type="number" min="1" step="1" extra-short>sec
+                            </td>
+                            <td>
+                                <span name="edit-cost_calc_day" option-multi></span>every day<br>
+                                <span name="edit-cost_calc_month" option-multi></span>every <input id="dayofmonth"
+                                    type="number" min="1" max="31" step="1" extra-short>. day of month<br>
+                                <span name="edit-cost_calc_year" option-multi></span>every <input id="dayofyear"
+                                    type="number" min="1" max="31" step="1" extra-short>.<input id="monthofyear"
+                                    type="number" min="1" max="12" step="1" extra-short>. of year<br>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button name="edit-cancel"><i class="fa-solid fa-xmark"></i></button>
+                <button name="edit-save"><i class="fa-solid fa-floppy-disk"></i></button>
+            </div>
+            <table extra-fill extra-center>
+                <thead>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>IP-Adress</th>
+                    <th>Update Interval</th>
+                    <th>Cost Calc at <span name="filltime"></span><br>Daily<br>Monthly<br>Yearly</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody id="devviebod">
+                    <tr>
+                        <td>
+                            No Devices listed.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button name="add-device"><i class="fa-solid fa-plus"></i></button>
+            <br>
+        </div>
+    </div>
+</body>
+
+</html>
