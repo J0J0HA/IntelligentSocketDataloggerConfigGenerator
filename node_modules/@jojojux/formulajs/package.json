@@ -1,0 +1,19 @@
+{
+  "name": "@jojojux/formulajs",
+  "version": "1.1.0",
+  "description": "formulaJS is a Tool to create Websites without worries about CSS.",
+  "main": "/src/formula.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/J0J0HA/formulaJS.git"
+  },
+  "author": "@jojojux",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/J0J0HA/formulaJS/issues"
+  },
+  "homepage": "https://github.com/J0J0HA/formulaJS#readme"
+}

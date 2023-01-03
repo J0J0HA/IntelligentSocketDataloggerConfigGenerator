@@ -1,0 +1,22 @@
+{
+  "name": "intelligentsocketdataloggerconfiggenerator",
+  "version": "1.0.0",
+  "description": "This is a config editor for [Technik-Tueftler/IntelligentSocketDatalogger](https://github.com/Technik-Tueftler/IntelligentSocketDatalogger).  \r **Go to https://isdledit.jojojux.de/ to test!**  \r Load a file using the import button to edit or start with an empty file using the editing options.  \r Press the save button to save your current inputs to a isdl_config.json in your downloads folder.  \r **All files are process locally in your browser, this website is fully client-side.**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/J0J0HA/IntelligentSocketDataloggerConfigGenerator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/J0J0HA/IntelligentSocketDataloggerConfigGenerator/issues"
+  },
+  "homepage": "https://github.com/J0J0HA/IntelligentSocketDataloggerConfigGenerator#readme",
+  "dependencies": {
+    "@jojojux/formulajs": "^1.1.0"
+  }
+}
