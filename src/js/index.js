@@ -181,10 +181,19 @@ function generate() {
 function edit_device(dname) {
     edit_name_no_alert = dname;
     dval = current.devices[dname];
+    const date = dval["cost_calc_year"]?.split(".")
+
     $("#edit-name").val(dname);
     $("#edit-type").text(dval["type"] || "undefined");
     $("#edit-ip").val(dval["ip"]);
     $("#edit-update_time").val(dval["update_time"]);
+    $("#dayofmonth").val(dval["cost_calc_month"] || "1");
+    $("#dayofyear").val(date?.[0] || "1");
+    $("#monthofyear").val(date?.[1] || "1");
+    formula.setOptionValue("edit-cost_calc_day", dval["cost_calc_day"])
+    formula.setOptionValue("edit-cost_calc_month", dval["cost_calc_month"])
+    formula.setOptionValue("edit-cost_calc_year", dval["cost_calc_year"])
+
     $("#edit-box").css("display", "block");
 }
 
