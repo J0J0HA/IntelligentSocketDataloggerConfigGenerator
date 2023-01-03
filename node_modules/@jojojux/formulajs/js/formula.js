@@ -15,6 +15,8 @@ const formula = {
         $("*[extra-short]").prop("extra-short", false).addClass("f-extra-short");
         $("*[extra-center]").prop("extra-center", false).addClass("f-extra-center");
         $("*[extra-right]").prop("extra-right", false).addClass("f-extra-right");
+        $("*[extra-space]").prop("extra-space", false).addClass("f-extra-space");
+        $("*[extra-nodot]").prop("extra-nodot", false).addClass("f-extra-nodot");
         $("*[collapse]").prop("collapse", false).addClass("f-collapse");
         $("*[collapsed]").prop("collapsed", false).addClass("f-tag-collapsed");
         $("*[trigger]").prop("trigger", false).addClass("f-part-trigger");
