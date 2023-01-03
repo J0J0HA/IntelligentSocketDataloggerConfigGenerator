@@ -6,5 +6,3 @@ Press "Save and Download" to save your current inputs to a isdl_config.json in y
 **All files are process locally in your browser, this website is fully client-side.**  
   
 For Reference of config values, look [here](https://github.com/Technik-Tueftler/IntelligentSocketDatalogger/blob/main/README.md#configuration-files).  
-  
-**Cost Calc is not yet added.**
