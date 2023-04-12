@@ -2,25 +2,16 @@
 <html lang="en">
 
 <head>
+    <script src="https://kit.fontawesome.com/858c9623af.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/node_modules/@jojojux/formulajs/css/formula.css">
-    <link rel="stylesheet" href="/src/jquery-ui/jquery-ui.min.css">
     <script src="/src/js/FileSaver.js"></script>
-    <script src="/src/js/jquery.js"></script>
-    <script src="/src/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/node_modules/@jojojux/formulajs/js/jquery.js"></script>
     <script src="/node_modules/@jojojux/formulajs/js/formula.js"></script>
-    <script src="/src/js/site/editor.js"></script>
-    <script src="/src/js/feather.js"></script>
-    <title>ISDL Config Editor</title>
-    <style>
-        .feather {
-            position: relative;
-            top: 1.5px;
-        }
-    </style>
+    <script src="_/src/js/editor_1.5.js"></script>
+    <title>ISDL Config Editor (legacy 1.5)</title>
 </head>
 
 <body f-font="Roboto">
-
     <p hide
         style="position:absolute;position:sticky;position:fixed;top:0px;left:0px;width:100vw;height:100vh;margin:0px;padding:10px;z-index:999;background:white;color:black;">
         <br><br>If you see this Screen, the JS has not yet been executed.<br>If you have a slow ethernet connection,
@@ -32,32 +23,33 @@
             href="https://github.com/J0J0HA/IntelligentSocketDataloggerConfigGenerator/issues/new/choose">https://github.com/J0J0HA/IntelligentSocketDataloggerConfigGenerator/issues/new/choose</a>
     </p>
     <div class="f-header f-part-bar">
-        <div class="f-header f-part-menu" style="font-weight:bold;"><i data-feather="menu"></i></div>
+        <div class="f-header f-part-menu"><i class="fa-solid fa-bars"></i></div>
         <div class="f-header f-part-title">ISDL Config Editor</div>
     </div>
     <div class="f-floatingmenu">
         <ul>
-            <li fref="/"><i data-feather="home"></i> Home</li>
-            <li select><i data-feather="settings"></i> Config Editor</li>
-            <li fref="/plugins"><i data-feather="terminal"></i> Plugins Editor</li>
-            <li fref="https://github.com/J0J0HA/IntelligentSocketDataloggerConfigGenerator"><i data-feather="github"></i> Show this on GitHub</li>
-            <li fref="https://github.com/Technik-Tueftler/IntelligentSocketDatalogger"><i data-feather="github"></i> Show ISDL on GitHub</li>
+            <li fref="/"><i class="fa-solid fa-house"></i> Home</li>
+            <li select><i class="fa-solid fa-gears"></i> Config Editor</li>
+            <li fref="/plugins"><i class="fa-solid fa-terminal"></i> Plugins Editor</li>
+            <li fref="https://github.com/J0J0HA/IntelligentSocketDataloggerConfigGenerator"><i
+                    class="fa-brands fa-github"></i> Show this on GitHub</li>
+            <li fref="https://github.com/Technik-Tueftler/IntelligentSocketDatalogger"><i
+                    class="fa-brands fa-github"></i> Show ISDL on GitHub</li>
             <li
                 fref="https://github.com/Technik-Tueftler/IntelligentSocketDatalogger/blob/main/README.md#configuration-files">
-                <i data-feather="github"></i> Reference
-            </li>
+                <i class="fa-brands fa-github"></i> Reference</li>
         </ul>
     </div>
     <div class="f-content">
         <br>
         <p>
             This is a config editor for <a link-github-repo>Technik-Tueftler/IntelligentSocketDatalogger</a>.<br>
-            Load a file with <i data-feather="folder"></i><br>
-            Press <i data-feather="download"></i> to save your current inputs to your downloads folder.<br>
+            Load a file with <i class="fa-solid fa-file-import"></i><br>
+            Press <i class="fa-solid fa-download"></i> to save your current inputs to your downloads folder.<br>
             All files are process locally in your browser, this website is fully client-side.<br><br>
         </p>
-        <p style="color:black; background-color:lime; padding:20px; border-radius: 20px; font-weight: bold;">
-            You are using the newest version 1.6 of this editor. If you want to use 1.5, click <a href="1.5.html">here</a>.
+        <p style="color:red; background-color:yellow; padding:20px; border-radius: 20px; font-weight: bold;">
+            You are using the legacy version of this editor! This is meant for 1.5, but the newest version is 1.6!
         </p>
         <h3>Files</h3>
         <table>
@@ -68,8 +60,8 @@
                         <input id="config-file" type="file">
                     </td>
                     <td>
-                        <button name="load-config"><i data-feather="folder"></i></button>
-                        <button name="save-config"><i data-feather="download"></i></button>
+                        <button name="load-config"><i class="fa-solid fa-file-import"></i></button>
+                        <button name="save-config"><i class="fa-solid fa-download"></i></button>
                     </td>
                 </tr>
                 <tr>
@@ -78,8 +70,8 @@
                         <input id="devices-file" type="file">
                     </td>
                     <td>
-                        <button name="load-devices"><i data-feather="folder"></i></button>
-                        <button name="save-devices"><i data-feather="download"></i></button>
+                        <button name="load-devices"><i class="fa-solid fa-file-import"></i></button>
+                        <button name="save-devices"><i class="fa-solid fa-download"></i></button>
                     </td>
                 </tr>
             </tbody>
@@ -95,7 +87,7 @@
                 <tr>
                     <td>Log all worse than</td>
                     <td>
-                        <span id="selected_icon"><i data-feather="info"></i></span>
+                        <span id="selected_icon"><i class="fa-solid fa-circle-info"></i></span>
                         <select id="log_level" onchange="generate()">
                             <option value="error">Errors</option>
                             <option value="warning">Warnings</option>
@@ -107,29 +99,14 @@
                 <tr>
                     <td>Cost Calc at Daytime</td>
                     <td>
-                        <i data-feather="clock"></i>
-                        <input id="cost_calc_tod" type="text" value="00:00" onchange="generate()">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Cost Calc at Date (monthly)</td>
-                    <td>
-                        <i data-feather="calendar"></i>
-                        <input id="cost_calc_dom_m" type="number" min="1" step="1" max="31" onchange="generate()"
-                            inputmode="numeric">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Cost Calc at Date (yearly)</td>
-                    <td>
-                        <i data-feather="calendar"></i>
-                        <input id="cost_calc_toy" type="text">
+                        <i class="fa-solid fa-clock"></i>
+                        <input id="cost_calc_request_time" type="text" value="00:00" onchange="generate()">
                     </td>
                 </tr>
                 <tr>
                     <td>Price per kwh in €, $, £, ...</td>
                     <td>
-                        <i data-feather="dollar-sign"></i>
+                        <i class="fa-solid fa-coins"></i>
                         <input id="price_kwh" type="number" min="0" step="0.1" value="0.3" onchange="generate()">
                     </td>
                 </tr>
@@ -146,7 +123,6 @@
                         <th>IP-Adress</th>
                         <th>Update Interval</th>
                         <th>Cost Calculation at <span name="filltime"></span></th>
-                        <th>Count Power-Ons</th>
                     </thead>
                     <tbody>
                         <tr>
@@ -155,7 +131,7 @@
                             </td>
                             <td>
                                 <span id="edit-type">none</span>
-                                <button name="edit-type-edit"><i data-feather="edit-2"></i></button>
+                                <button name="edit-type-edit"><i class="fa-solid fa-pen"></i></button>
                             </td>
                             <td>
                                 <input id="edit-ip" type="text">
@@ -164,20 +140,18 @@
                                 <input id="edit-update_time" type="number" min="1" step="1" extra-short>sec
                             </td>
                             <td>
-                                <span name="edit-cost_calc_day" option-multi></span>daily<br>
-                                <span name="edit-cost_calc_month" option-multi></span>monthly<br>
-                                <span name="edit-cost_calc_year" option-multi></span>yearly<br>
-                            </td>
-                            <td>
-                                <span name="edit-poc_day" option-multi></span>daily<br>
-                                <span name="edit-poc_month" option-multi></span>monthly<br>
-                                <span name="edit-poc_year" option-multi></span>yearly<br>
+                                <span name="edit-cost_calc_day" option-multi></span>every day<br>
+                                <span name="edit-cost_calc_month" option-multi></span>every <input id="dayofmonth"
+                                    type="number" min="1" max="31" step="1" extra-short>. day of month<br>
+                                <span name="edit-cost_calc_year" option-multi></span>every <input id="dayofyear"
+                                    type="number" min="1" max="31" step="1" extra-short>.<input id="monthofyear"
+                                    type="number" min="1" max="12" step="1" extra-short>. of year<br>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <button name="edit-cancel"><i data-feather="x"></i></button>
-                <button name="edit-save"><i data-feather="save"></i></button>
+                <button name="edit-cancel"><i class="fa-solid fa-xmark"></i></button>
+                <button name="edit-save"><i class="fa-solid fa-floppy-disk"></i></button>
             </div>
             <table extra-fill extra-center>
                 <thead>
@@ -185,8 +159,7 @@
                     <th>Type</th>
                     <th>IP-Adress</th>
                     <th>Update Interval</th>
-                    <th>Cost Calc at <span name="filltime"></span></th>
-                    <th>Count Power-Ons</th>
+                    <th>Cost Calc at <span name="filltime"></span><br>Daily<br>Monthly<br>Yearly</th>
                     <th>Actions</th>
                 </thead>
                 <tbody id="devviebod">
@@ -197,7 +170,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button name="add-device"><i data-feather="plus"></i></button>
+            <button name="add-device"><i class="fa-solid fa-plus"></i></button>
             <br>
         </div>
     </div>
