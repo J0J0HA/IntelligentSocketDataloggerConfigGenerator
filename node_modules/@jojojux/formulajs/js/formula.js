@@ -34,7 +34,11 @@ const formula = {
         });
         formula.reindex_static();
     },
+    set_font: (fontname) => {
+        document.documentElement.style.setProperty('--font', fontname || "monospace");
+    },
     reindex_static: () => {
+        formula.set_font($("body").attr("f-font") || "monospace")
         $("button").addClass("f-button")
         $("input[type='submit']").addClass("f-button")
         $("input[type='button']").addClass("f-button")

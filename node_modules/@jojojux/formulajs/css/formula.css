@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&family=Roboto:wght@100&display=swap');
+@import url('../fonts/productsans.css');
+@import url('../fonts/roboto.css');
 
 html,
 body {
@@ -23,7 +23,7 @@ body {
     --dgdark: #2d5261;
     --clear: #FFFFFF;
 
-    --font: Roboto, monospace;
+    --font: monospace;
 }
 
 * {
