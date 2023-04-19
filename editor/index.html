@@ -147,6 +147,7 @@
                         <th>Update Interval</th>
                         <th>Cost Calculation at <span name="filltime"></span></th>
                         <th>Count Power-Ons</th>
+                        <th>Power-On Thresholds</th>
                     </thead>
                     <tbody>
                         <tr>
@@ -173,6 +174,10 @@
                                 <span name="edit-poc_month" option-multi></span>monthly<br>
                                 <span name="edit-poc_year" option-multi></span>yearly<br>
                             </td>
+                            <td>
+                                Upper/On: <input id="edit-thresh_high" type="number" inputmode="numeric" min="0" step="1" value="1" extra-short><br>
+                                Lower/Off: <input id="edit-thresh_low" type="number" inputmode="numeric" min="0" step="1" value="0" extra-short>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -187,6 +192,7 @@
                     <th>Update Interval</th>
                     <th>Cost Calc at <span name="filltime"></span></th>
                     <th>Count Power-Ons</th>
+                    <th>Power-On Thresholds</th>
                     <th>Actions</th>
                 </thead>
                 <tbody id="devviebod">

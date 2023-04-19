@@ -17,9 +17,10 @@ if (!String.prototype.padStart) {
     };
 }
 
+let current = {};
 
 try {
-    var current = JSON.parse(localStorage.getItem("1.6-config")) || {
+    current = JSON.parse(localStorage.getItem("1.6-config")) || {
         general: {
             log_level: "info",
             cost_calc_request_time: "00:00",
@@ -28,7 +29,7 @@ try {
         devices: {}
     }
 } catch (e) {
-    var current = {
+    current = {
         general: {
             log_level: "info",
             cost_calc_request_time: "00:00",
@@ -38,14 +39,14 @@ try {
     }
 }
 
-var edit_name_no_alert = "NGGYU";
+let edit_name_no_alert = "NGGYU";
 
 $(() => {
     $("#cost_calc_toy").datepicker({
         defaultDate: 0,
         changeYear: false,
         dateFormat: "dd.mm"
-    }).focus(function() {
+    }).focus(function () {
         $(".ui-datepicker-year").hide()
     })
 
@@ -96,6 +97,9 @@ $(() => {
         formula.setOptionValue("edit-poc_month", false)
         formula.setOptionValue("edit-poc_year", false)
 
+        $("#edit-thesh_low").val("0");
+        $("#edit-thesh_high").val("1");
+
         $("#edit-box").css("display", "block");
     })
 
@@ -114,7 +118,7 @@ $(() => {
         current.devices[ename] = {
             type: $("#edit-type").text(),
             ip: $("#edit-ip").val(),
-            update_time: $("#edit-update_time").val(),
+            update_time: parseInt($("#edit-update_time").val()),
             cost_calculation: {
                 daily: formula.getOptionValue("edit-cost_calc_day"),
                 monthly: formula.getOptionValue("edit-cost_calc_month"),
@@ -124,8 +128,8 @@ $(() => {
                 daily: formula.getOptionValue("edit-poc_day"),
                 monthly: formula.getOptionValue("edit-poc_month"),
                 yearly: formula.getOptionValue("edit-poc_year"),
-                on_threshold: 2,
-                off_threshold: 1
+                on_threshold: parseInt($("#edit-thresh_high").val()),
+                off_threshold: parseInt($("#edit-thresh_low").val())
             }
         }
         $("#edit-box").css("display", "none");
@@ -145,10 +149,10 @@ $(() => {
         $("#selected_icon").html(feather.icons[loglevelicon[$("#log_level").val()]].toSvg())
 
         // Check values to be valid here!
-        matchres = $("#cost_calc_tod").val().match(/^(\d\d?)\:(\d\d?)$/)
+        let matchres = $("#cost_calc_tod").val().match(/^(\d\d?):(\d\d?)$/)
         if (!matchres || matchres[1] < 0 || matchres[1] > 12 || matchres[2] < 0 || matchres[2] > 60) $("#cost_calc_tod").addClass("f-tag-wrong")
         else $("#cost_calc_tod").removeClass("f-tag-wrong")
-        if (!$("#price_kwh").val().match(/^[\d\.]+$/g) || (parseFloat($("#price_kwh").val()) <= 0)) $("#price_kwh").addClass("f-tag-wrong")
+        if (!$("#price_kwh").val().match(/^[\d.]+$/g) || (parseFloat($("#price_kwh").val()) <= 0)) $("#price_kwh").addClass("f-tag-wrong")
         else $("#price_kwh").removeClass("f-tag-wrong")
         if (!$("#edit-name").val().match(/^.+$/g) || (($("#edit-name").val() != edit_name_no_alert) && ($("#edit-name").val() in current.devices))) $("#edit-name").addClass("f-tag-wrong")
         else $("#edit-name").removeClass("f-tag-wrong")
@@ -156,6 +160,10 @@ $(() => {
         else $("#edit-ip").removeClass("f-tag-wrong")
         if (!$("#edit-update_time").val().match(/^\d+$/g) || (parseInt($("#edit-update_time").val()) <= 0)) $("#edit-update_time").addClass("f-tag-wrong")
         else $("#edit-update_time").removeClass("f-tag-wrong")
+        if (!$("#edit-thresh_low").val().match(/^\d+$/g) || (parseInt($("#edit-thresh_low").val()) < 0)) $("#edit-thresh_low").addClass("f-tag-wrong")
+        else $("#edit-thresh_low").removeClass("f-tag-wrong")
+        if (!$("#edit-thresh_high").val().match(/^\d+$/g) || (parseInt($("#edit-thresh_high").val()) < 0)) $("#edit-thresh_high").addClass("f-tag-wrong")
+        else $("#edit-thresh_high").removeClass("f-tag-wrong")
         if (!$("#cost_calc_dom_m").val().match(/^\d+$/g) || (parseInt($("#cost_calc_dom_m").val()) <= 0) || (parseInt($("#cost_calc_dom_m").val()) > 31)) $("#cost_calc_dom_m").addClass("f-tag-wrong")
         else $("#cost_calc_dom_m").removeClass("f-tag-wrong")
         matchres = $("#cost_calc_toy").val().match(/^(\d+)\.(\d+)$/);
@@ -167,10 +175,10 @@ $(() => {
 });
 
 function list_devices() {
-    var html = "";
+    let html = "";
     for (const dname in current.devices) {
-        dval = current.devices[dname];
-        ccval = dval["cost_calculation"]
+        let dval = current.devices[dname];
+        let ccval = dval["cost_calculation"]
         html += "<tr>";
         html += '<td>' + dname + "</td>";
         html += '<td><i data-feather="target"></i> ' + (devices[dval["type"]] || dval["type"] || "undefined") + "</td>";
@@ -179,6 +187,7 @@ function list_devices() {
         html += '<td>' + (ccval["daily"] ? '<i data-feather="check"></i>' : '<i data-feather="x"></i>') + '<br>' + (ccval["monthly"] ? '<i data-feather="check"></i>' : '<i data-feather="x"></i>') + '<br>' + (ccval["yearly"] ? '<i data-feather="check"></i>' : '<i data-feather="x"></i>') + '</td>';
         ccval = dval["power_on_counter"]
         html += '<td>' + (ccval["daily"] ? '<i data-feather="check"></i>' : '<i data-feather="x"></i>') + '<br>' + (ccval["monthly"] ? '<i data-feather="check"></i>' : '<i data-feather="x"></i>') + '<br>' + (ccval["yearly"] ? '<i data-feather="check"></i>' : '<i data-feather="x"></i>') + '</td>';
+        html += '<td>Upper/On: ' + ccval["on_threshold"] + ' W<br>Lower/Off: ' + ccval["off_threshold"] + ' W</td>'
         html += '<td><button onclick="edit_device(\'' + dname + '\')"><i data-feather="settings"></i></button><button onclick="delete_device(\'' + dname + '\')"><i data-feather="trash-2"></i></button></td>';
         html += "</tr>";
     }
@@ -199,10 +208,9 @@ function generate() {
 
 function edit_device(dname) {
     edit_name_no_alert = dname;
-    dval = current.devices[dname];
-    ccval = dval["cost_calculation"];
-    const date = dval["cost_calc_year"]?.split(".")
-    
+    let dval = current.devices[dname];
+    let ccval = dval["cost_calculation"];
+
     $("#edit-name").val(dname);
     $("#edit-type").text(dval["type"] || "undefined");
     $("#edit-ip").val(dval["ip"]);
@@ -214,6 +222,9 @@ function edit_device(dname) {
     formula.setOptionValue("edit-poc_day", ccval["daily"])
     formula.setOptionValue("edit-poc_month", ccval["monthly"])
     formula.setOptionValue("edit-poc_year", ccval["yearly"])
+
+    $("#edit-thresh_high").val(ccval["on_threshold"]);
+    $("#edit-thresh_low").val(ccval["off_threshold"]);
 
     $("#edit-box").css("display", "block");
 }
