@@ -46,7 +46,7 @@ $(() => {
         changeYear: false,
         dateFormat: "dd.mm"
     }).focus(function() {
-        //$(".ui-datepicker-year").hide()
+        $(".ui-datepicker-year").hide()
     })
 
 
